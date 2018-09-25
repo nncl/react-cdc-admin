@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
@@ -8,8 +9,17 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            results: [{name: 'Cauê', email: 'nncl@live.com', password: '123'}]
+            results: []
         };
+    }
+
+    componentWillMount() {
+        this.getAuthors();
+    }
+
+    getAuthors() {
+        axios.get('http://cdc-react.herokuapp.com/api/autores')
+            .then(response => this.setState({results: response.data}));
     }
 
     render() {
@@ -67,7 +77,7 @@ class App extends Component {
                                     this.state.results.map((item, i) => {
                                         return (
                                             <tr key={i}>
-                                                <td>{item.name}</td>
+                                                <td>{item.nome}</td>
                                                 <td>{item.email}</td>
                                             </tr>
                                         );
