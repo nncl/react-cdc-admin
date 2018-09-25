@@ -4,6 +4,14 @@ import './css/pure-min.css';
 import './css/side-menu.css';
 
 class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            results: [{name: 'Cauê', email: 'nncl@live.com', password: '123'}]
+        };
+    }
+
     render() {
         return (
             <div id="layout">
@@ -50,15 +58,21 @@ class App extends Component {
                             <table className="pure-table">
                                 <thead>
                                 <tr>
-                                    <th>Nome</th>
-                                    <th>email</th>
+                                    <th>Name</th>
+                                    <th>E-mail</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Alberto</td>
-                                    <td>alberto.souza@caelum.com.br</td>
-                                </tr>
+                                {
+                                    this.state.results.map((item, i) => {
+                                        return (
+                                            <tr key={i}>
+                                                <td>{item.name}</td>
+                                                <td>{item.email}</td>
+                                            </tr>
+                                        );
+                                    })
+                                }
                                 </tbody>
                             </table>
                         </div>
