@@ -3,6 +3,8 @@ import axios from 'axios'
 import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
+import CustomInput from './components/custom-input';
+import CustomButton from './components/custom-button';
 
 class App extends Component {
 
@@ -79,25 +81,15 @@ class App extends Component {
                     <div className="content" id="content">
                         <div className="pure-form pure-form-aligned">
                             <form className="pure-form pure-form-aligned" onSubmit={this.sendForm}>
-                                <div className="pure-control-group">
-                                    <label htmlFor="nome">Nome</label>
-                                    <input id="nome" type="text" name="nome" value={this.state.name}
-                                           onChange={this.setName}/>
-                                </div>
-                                <div className="pure-control-group">
-                                    <label htmlFor="email">Email</label>
-                                    <input id="email" type="email" name="email" value={this.state.email}
-                                           onChange={this.setEmail}/>
-                                </div>
-                                <div className="pure-control-group">
-                                    <label htmlFor="senha">Senha</label>
-                                    <input id="senha" type="password" name="senha" value={this.state.password}
-                                           onChange={this.setPassword}/>
-                                </div>
-                                <div className="pure-control-group">
-                                    <label></label>
-                                    <button type="submit" className="pure-button pure-button-primary">Gravar</button>
-                                </div>
+                                <CustomInput id="nome" type="text" name="nome" value={this.state.name}
+                                             onChange={this.setName}/>
+                                <CustomInput id="email" type="email" name="email" value={this.state.email}
+                                             onChange={this.setEmail}/>
+                                <CustomInput id="senha" type="password" name="password" value={this.state.password}
+                                             onChange={this.setPassword}/>
+
+                                <CustomButton type="type" label="Save"/>
+
                             </form>
 
                         </div>
