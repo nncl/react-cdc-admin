@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CustomInput from "./components/custom-input";
 import CustomButton from "./components/custom-button";
 import axios from "axios";
+import PubSub from "pubsub-js";
 
 export class AuthorForm extends Component {
 
@@ -29,7 +30,7 @@ export class AuthorForm extends Component {
         };
 
         axios.post('http://cdc-react.herokuapp.com/api/autores', data)
-            .then(response => this.props.callbackUpdateAuthorList(response.data))
+            .then(response => PubSub.publish('author:update-list', response.data))
             .catch(err => console.error(err));
     }
 
