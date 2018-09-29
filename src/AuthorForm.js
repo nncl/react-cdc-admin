@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {toast} from 'react-toastify';
+import axios from "axios";
+import PubSub from "pubsub-js";
+
 import HandleError from "./helpers/handle-error";
 import CustomInput from "./components/custom-input";
 import CustomButton from "./components/custom-button";
-import axios from "axios";
-import PubSub from "pubsub-js";
 
 export class AuthorForm extends Component {
 
@@ -13,7 +14,8 @@ export class AuthorForm extends Component {
         this.state = {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            loading: false
         };
 
         this.sendForm = this.sendForm.bind(this);
@@ -24,6 +26,8 @@ export class AuthorForm extends Component {
 
     sendForm(event) {
         event.preventDefault();
+
+        this.setState({loading: true});
 
         const data = {
             nome: this.state.name,
@@ -41,7 +45,8 @@ export class AuthorForm extends Component {
                 this.setState({
                     name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    loading: false
                 });
 
                 toast.success(response.statusText, {
@@ -49,6 +54,7 @@ export class AuthorForm extends Component {
                 });
             })
             .catch(err => {
+                this.setState({loading: false});
                 if (err.response.data['errors']) new HandleError().publishError(err.response.data['errors']);
             });
     }
@@ -76,7 +82,7 @@ export class AuthorForm extends Component {
                     <CustomInput id="senha" type="password" name="password" value={this.state.password}
                                  onChange={this.setPassword}/>
 
-                    <CustomButton type="type" label="Save"/>
+                    <CustomButton type="type" label="Save" loading={this.state.loading}/>
 
                 </form>
             </div>
