@@ -9,6 +9,7 @@
     "react-dom": "^16.4.2",
     "react-ladda": "^6.0.0",
     "react-scripts": "1.1.4",
+    "react-spinners": "^0.4.5",
     "react-toastify": "^4.3.2"
   },
   "scripts": {

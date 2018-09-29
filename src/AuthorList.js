@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
+import {ClipLoader} from 'react-spinners';
 
 export class AuthorList extends Component {
 
     render() {
         return (
             <div>
+                <ClipLoader
+                    sizeUnit={"px"}
+                    color={'#123abc'}
+                    loading={this.props.loading}/>
+
                 <table className="pure-table">
                     <thead>
                     <tr>

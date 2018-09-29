@@ -9,12 +9,15 @@ export class AuthorBox extends Component {
     constructor() {
         super();
         this.state = {
-            results: []
+            results: [],
+            loading: false
         };
     }
 
     componentDidMount() {
         this.getAuthors();
+
+        this.setState({loading: true});
 
         PubSub.subscribe('author:update-list', (topic, results) => {
             this.setState({results: results})
@@ -23,14 +26,14 @@ export class AuthorBox extends Component {
 
     getAuthors() {
         axios.get('http://cdc-react.herokuapp.com/api/autores')
-            .then(response => this.setState({results: response.data}));
+            .then(response => this.setState({results: response.data, loading: false}));
     }
 
     render() {
         return (
             <div>
                 <AuthorForm/>
-                <AuthorList results={this.state.results}/>
+                <AuthorList results={this.state.results} loading={this.state.loading}/>
             </div>
         );
     }
