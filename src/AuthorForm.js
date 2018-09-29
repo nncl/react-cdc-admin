@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {toast} from 'react-toastify';
 import HandleError from "./helpers/handle-error";
 import CustomInput from "./components/custom-input";
 import CustomButton from "./components/custom-button";
@@ -41,6 +42,10 @@ export class AuthorForm extends Component {
                     name: '',
                     email: '',
                     password: ''
+                });
+
+                toast.success(response.statusText, {
+                    position: toast.POSITION.TOP_RIGHT
                 });
             })
             .catch(err => {

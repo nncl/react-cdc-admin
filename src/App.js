@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {ToastContainer} from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
@@ -24,9 +27,12 @@ class App extends Component {
                     </div>
                 </div>
                 <div id="main">
+                    <ToastContainer/>
+
                     <div className="header">
                         <h1>Authors Form</h1>
                     </div>
+
                     <div className="content" id="content">
                         <AuthorBox/>
                     </div>
