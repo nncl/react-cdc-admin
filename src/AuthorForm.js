@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import HandleError from "./helpers/handle-error";
 import CustomInput from "./components/custom-input";
 import CustomButton from "./components/custom-button";
 import axios from "axios";
@@ -29,9 +30,22 @@ export class AuthorForm extends Component {
             senha: this.state.password
         };
 
+        PubSub.publish('clear-field');
+
         axios.post('http://cdc-react.herokuapp.com/api/autores', data)
-            .then(response => PubSub.publish('author:update-list', response.data))
-            .catch(err => console.error(err));
+            .then(response => {
+                PubSub.publish('author:update-list', response.data);
+
+                // Reset form
+                this.setState({
+                    name: '',
+                    email: '',
+                    password: ''
+                });
+            })
+            .catch(err => {
+                if (err.response.data['errors']) new HandleError().publishError(err.response.data['errors']);
+            });
     }
 
     setName(event) {
