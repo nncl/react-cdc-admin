@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {ToastContainer} from 'react-toastify';
+import {Link} from "react-router-dom";
 
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './css/pure-min.css';
 import './css/side-menu.css';
-
-import {AuthorBox} from "./AuthorBox";
 
 class App extends Component {
 
@@ -20,9 +19,15 @@ class App extends Component {
                     <div className="pure-menu">
                         <a className="pure-menu-heading" href="#">Company</a>
                         <ul className="pure-menu-list">
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">Home</a></li>
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">Author</a></li>
-                            <li className="pure-menu-item"><a href="#" className="pure-menu-link">Books</a></li>
+                            <li className="pure-menu-item">
+                                <Link to='/' className="pure-menu-link">Home</Link>
+                            </li>
+                            <li className="pure-menu-item">
+                                <Link to='/author' className="pure-menu-link">Author</Link>
+                            </li>
+                            <li className="pure-menu-item">
+                                <Link to='/book' className="pure-menu-link">Book</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -30,11 +35,10 @@ class App extends Component {
                     <ToastContainer/>
 
                     <div className="header">
-                        <h1>Authors Form</h1>
+                        <h1>Welcome</h1>
                     </div>
 
                     <div className="content" id="content">
-                        <AuthorBox/>
                     </div>
                 </div>
             </div>
