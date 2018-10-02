@@ -33,13 +33,7 @@ class App extends Component {
                 </div>
                 <div id="main">
                     <ToastContainer/>
-
-                    <div className="header">
-                        <h1>Welcome</h1>
-                    </div>
-
-                    <div className="content" id="content">
-                    </div>
+                    {this.props.children}
                 </div>
             </div>
         );

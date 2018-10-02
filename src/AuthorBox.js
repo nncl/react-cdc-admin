@@ -32,6 +32,10 @@ export class AuthorBox extends Component {
     render() {
         return (
             <div>
+                <div className="header">
+                    <h1>Author Form</h1>
+                </div>
+
                 <AuthorForm/>
                 <AuthorList results={this.state.results} loading={this.state.loading}/>
             </div>
