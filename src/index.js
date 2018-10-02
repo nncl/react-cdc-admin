@@ -9,13 +9,13 @@ import {AuthorBox} from "./AuthorBox";
 
 ReactDOM.render(
     <Router>
-        <Switch>
-            <App>
+        <App>
+            <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route path='/author' component={AuthorBox}/>
                 <Route path='/book' component={App}/>
-            </App>
-        </Switch>
+            </Switch>
+        </App>
     </Router>,
     document.getElementById('root')
 );
