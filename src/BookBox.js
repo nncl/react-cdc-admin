@@ -1,31 +1,39 @@
 import React, {Component} from 'react';
-import {AuthorForm} from "./AuthorForm";
-import {AuthorList} from "./AuthorList";
+import {BookForm} from "./components/book/BookForm";
+import {BookList} from "./components/book/BookList";
 import axios from "axios";
 import PubSub from "pubsub-js";
 
-export class AuthorBox extends Component {
+export class BookBox extends Component {
 
     constructor() {
         super();
         this.state = {
             results: [],
+            authors: [],
             loading: false
         };
     }
 
     componentDidMount() {
         this.getAuthors();
+        this.getBooks();
 
         this.setState({loading: true});
 
-        PubSub.subscribe('author:update-list', (topic, results) => {
+        PubSub.subscribe('book:update-list', (topic, results) => {
             this.setState({results: results})
         });
     }
 
     getAuthors() {
         axios.get('http://cdc-react.herokuapp.com/api/autores')
+            .then(response => this.setState({authors: response.data, loading: false}))
+            .catch(() => this.setState({loading: false}));
+    }
+
+    getBooks() {
+        axios.get('http://cdc-react.herokuapp.com/api/livros')
             .then(response => this.setState({results: response.data, loading: false}))
             .catch(() => this.setState({loading: false}));
     }
@@ -34,11 +42,11 @@ export class AuthorBox extends Component {
         return (
             <div>
                 <div className="header">
-                    <h1>Author Form</h1>
+                    <h1>Book Form</h1>
                 </div>
 
-                <AuthorForm/>
-                <AuthorList results={this.state.results} loading={this.state.loading}/>
+                <BookForm authors={this.state.authors}/>
+                <BookList results={this.state.results} loading={this.state.loading}/>
             </div>
         );
     }
