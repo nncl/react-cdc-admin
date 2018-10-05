@@ -27,11 +27,7 @@ export default class CustomInput extends Component {
                     {this.props.name}
                 </label>
 
-                <input id={this.props.id}
-                       type={this.props.type}
-                       name={this.props.name}
-                       value={this.props.value}
-                       onChange={this.props.onChange}/>
+                <input {...this.props}/>
 
                 <span className="error">
                     {this.state.error}
