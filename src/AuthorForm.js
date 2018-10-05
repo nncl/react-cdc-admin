@@ -19,9 +19,6 @@ export class AuthorForm extends Component {
         };
 
         this.sendForm = this.sendForm.bind(this);
-        this.setName = this.setName.bind(this);
-        this.setEmail = this.setEmail.bind(this);
-        this.setPassword = this.setPassword.bind(this);
     }
 
     sendForm(event) {
@@ -59,28 +56,22 @@ export class AuthorForm extends Component {
             });
     }
 
-    setName(event) {
-        this.setState({name: event.target.value});
-    }
-
-    setEmail(event) {
-        this.setState({email: event.target.value});
-    }
-
-    setPassword(event) {
-        this.setState({password: event.target.value});
+    updateField(field, event) {
+        const obj = {};
+        obj[field] = event.target.value;
+        this.setState(obj);
     }
 
     render() {
         return (
             <div className="pure-form pure-form-aligned">
                 <form className="pure-form pure-form-aligned" onSubmit={this.sendForm}>
-                    <CustomInput id="nome" type="text" name="nome" value={this.state.name}
-                                 onChange={this.setName}/>
+                    <CustomInput id="nome" type="text" name="name" value={this.state.name}
+                                 onChange={this.updateField.bind(this, 'name')}/>
                     <CustomInput id="email" type="email" name="email" value={this.state.email}
-                                 onChange={this.setEmail}/>
+                                 onChange={this.updateField.bind(this, 'email')}/>
                     <CustomInput id="senha" type="password" name="password" value={this.state.password}
-                                 onChange={this.setPassword}/>
+                                 onChange={this.updateField.bind(this, 'password')}/>
 
                     <CustomButton type="type" label="Save" loading={this.state.loading}/>
 

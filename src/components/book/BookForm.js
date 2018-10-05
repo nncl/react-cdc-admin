@@ -19,9 +19,6 @@ export class BookForm extends Component {
         };
 
         this.sendForm = this.sendForm.bind(this);
-        this.setTitle = this.setTitle.bind(this);
-        this.setPrice = this.setPrice.bind(this);
-        this.setAuthorId = this.setAuthorId.bind(this);
     }
 
     sendForm(event) {
@@ -59,26 +56,20 @@ export class BookForm extends Component {
             });
     }
 
-    setTitle(event) {
-        this.setState({title: event.target.value});
-    }
-
-    setPrice(event) {
-        this.setState({price: event.target.value});
-    }
-
-    setAuthorId(event) {
-        this.setState({authorId: event.target.value});
+    updateField(field, event) {
+        const obj = {};
+        obj[field] = event.target.value;
+        this.setState(obj);
     }
 
     render() {
         return (
             <div className="pure-form pure-form-aligned">
                 <form className="pure-form pure-form-aligned" onSubmit={this.sendForm}>
-                    <CustomInput id="title" type="text" name="title" value={this.state.title}
-                                 onChange={this.setTitle}/>
-                    <CustomInput id="price" type="tel" name="price" value={this.state.price}
-                                 onChange={this.setPrice}/>
+                    <CustomInput id="titulo" type="text" name="title" value={this.state.title}
+                                 onChange={this.updateField.bind(this, 'title')}/>
+                    <CustomInput id="preco" type="tel" name="price" value={this.state.price}
+                                 onChange={this.updateField.bind(this, 'price')}/>
 
                     {/* TODO Create custom component */}
                     <div className="pure-control-group">
@@ -86,7 +77,7 @@ export class BookForm extends Component {
                             Author
                         </label>
 
-                        <select value={this.state.authorId} name="autorId" onChange={this.setAuthorId}>
+                        <select value={this.state.authorId} id="autorId" name="autorId" onChange={this.updateField.bind(this, 'authorId')}>
                             <option value="">Selecione</option>
                             {
                                 this.props.authors.map((item) => {
